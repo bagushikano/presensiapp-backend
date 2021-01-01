@@ -37,7 +37,7 @@ Route::post('presensi/open/{presensi}', 'CRUDController@openPresensi');
 Route::post('presensi/close/{presensi}', 'CRUDController@closePresensi');
 
 Route::get('presensi/mahasiswa/all', 'CRUDController@allPresensi');
-Route::post('presensi/mahasiswa/detail/', 'CRUDController@detailPresensiMahasiswa');
+Route::post('presensi/mahasiswa/detail', 'CRUDController@detailPresensiMahasiswa');
 Route::get('presensi/mahasiswa/close', 'CRUDController@listClosePresensi');
 Route::get('presensi/mahasiswa/open', 'CRUDController@listOpenPresensi');
 Route::post('presensi/mahasiswa/sign', 'CRUDController@newDetailPresensi');
