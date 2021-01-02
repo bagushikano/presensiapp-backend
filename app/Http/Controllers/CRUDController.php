@@ -25,32 +25,18 @@ class CRUDController extends Controller
         $notiftitle = "Ada presensi baru oleh ". $id->nama;
         $notifcontent = "Ada presensi baru dengan nama ". $request->nama_presensi;
 
-        $curl = curl_init();
-        curl_setopt_array($curl, array(
-        CURLOPT_URL => 'https://fcm.googleapis.com/fcm/send',
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_ENCODING => '',
-        CURLOPT_MAXREDIRS => 10,
-        CURLOPT_TIMEOUT => 0,
-        CURLOPT_FOLLOWLOCATION => true,
-        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-        CURLOPT_CUSTOMREQUEST => 'POST',
-        CURLOPT_POSTFIELDS =>'{
-        "notification": {
-            "title": ' . $notiftitle . ',
-            "body":' . $notifcontent . '
-        },
-        "to": "/topics/all"
-        }',
-        CURLOPT_HTTPHEADER => array(
-            'Content: application/json',
+        $url = 'https://fcm.googleapis.com/fcm/send';
+        $fields = array(
+            "to" => "/topics/all",
+            'notification' => array(
+                "title" => $notiftitle,
+                "body" => $notifcontent
+            )
+        );
+        $headers = array(
             'Authorization: key=AAAARvWFBSk:APA91bHfVZVkufvKbriuO7McpV-CguHTWwa7e9nuswg18F7N3qSjgEefKJsDqZTAKcZj26x0mEYgGaymJ_WtDuApADGhUsI9IbdxQJn1YTo4GC-Q738Rq4uvWabsbQ1pFTbr2k_o1T2Z',
-            'Content-Type: application/json'
-        ),
-        ));
-
-        curl_exec($curl);
-        curl_close($curl);
+            'Content-type: Application/json'
+        );
 
         return response()->json([
             'message' => 'Presensi Berhasil di Buat',
