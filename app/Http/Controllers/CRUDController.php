@@ -118,8 +118,10 @@ class CRUDController extends Controller
             'is_open' => 1
         ]);
 
+        $presensi = Presensi::where('id_presensi', $presensi)->get()->first();
+
         $notiftitle = "Presensi di buka";
-        $notifcontent = "Presensi dengan nama ". $updatePresensi->nama_presensi ." telah di buka";
+        $notifcontent = "Presensi dengan nama ". $presensi->nama_presensi ." telah di buka";
 
         $url = 'https://fcm.googleapis.com/fcm/send';
         $fields = array(
@@ -157,8 +159,10 @@ class CRUDController extends Controller
             'is_open' => 0
         ]);
 
-        $notiftitle = "Presensi di tutup". $id->nama;
-        $notifcontent = "Presensi dengan nama ". $updatePresensi->nama_presensi ." telah di tutup";
+        $presensi = Presensi::where('id_presensi', $presensi)->get()->first();
+
+        $notiftitle = "Presensi di tutup";
+        $notifcontent = "Presensi dengan nama ". $presensi->nama_presensi ." telah di tutup";
 
         $url = 'https://fcm.googleapis.com/fcm/send';
         $fields = array(
