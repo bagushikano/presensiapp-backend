@@ -48,10 +48,9 @@ class CRUDController extends Controller
             'Content-Type: application/json'
         ),
         ));
-        $response = curl_exec($curl);
-        curl_close($curl);
-        echo $response;
 
+        curl_exec($curl);
+        curl_close($curl);
 
         return response()->json([
             'message' => 'Presensi Berhasil di Buat',
