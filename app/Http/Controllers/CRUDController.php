@@ -12,7 +12,7 @@ use Carbon\Carbon;
 class CRUDController extends Controller
 {
     public function newPresensi(Request $request){
-        $id = Dosen::where('username', $request->username)->get('id_dosen')->first();
+        $id = Dosen::where('username', $request->username)->get('id_dosen', 'nama')->first();
         $presensi = Presensi::create([
             'id_dosen' => $id->id_dosen,
             'nama_presensi' => $request->nama_presensi,
@@ -25,6 +25,36 @@ class CRUDController extends Controller
             'message' => 'Presensi Berhasil di Buat',
             'data' => $presensi
         ]);
+
+        $notiftitle = "Ada presensi baru oleh ". $id->nama;
+        $notifcontent = "Ada presensi baru dengan nama ". $request->nama_presensi;
+
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+        CURLOPT_URL => 'https://fcm.googleapis.com/fcm/send',
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => '',
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 0,
+        CURLOPT_FOLLOWLOCATION => true,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => 'POST',
+        CURLOPT_POSTFIELDS =>'{
+        "notification": {
+            "title": ' . $notiftitle . ',
+            "body":' . $notifcontent . '
+        },
+        "to": "/topics/all"
+        }',
+        CURLOPT_HTTPHEADER => array(
+            'Content: application/json',
+            'Authorization: key=AAAARvWFBSk:APA91bHfVZVkufvKbriuO7McpV-CguHTWwa7e9nuswg18F7N3qSjgEefKJsDqZTAKcZj26x0mEYgGaymJ_WtDuApADGhUsI9IbdxQJn1YTo4GC-Q738Rq4uvWabsbQ1pFTbr2k_o1T2Z',
+            'Content-Type: application/json'
+        ),
+        ));
+        $response = curl_exec($curl);
+        curl_close($curl);
+        echo $response;
     }
 
     public function listPresensiDosen(Request $request){
