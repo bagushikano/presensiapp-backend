@@ -288,7 +288,7 @@ class CRUDController extends Controller
         ]);
 
         $detailpresensi = DetailPresensi::where('id_detail_presensi', $detailPresensi)->get()->first();
-        $presensi = Presensi::where("id_presensi", $detailpresensi->id_presensi);
+        $presensi = Presensi::where("id_presensi", $detailpresensi->id_presensi)->get()->first();
 
         $notiftitle = "Presensi anda di approve";
         $notifcontent = "Presensi anda pada ". $presensi->nama_presensi ." telah di approve";
@@ -330,7 +330,7 @@ class CRUDController extends Controller
         ]);
 
         $detailpresensi = DetailPresensi::where('id_detail_presensi', $detailPresensi)->get()->first();
-        $presensi = Presensi::where("id_presensi", $detailpresensi->id_presensi);
+        $presensi = Presensi::where("id_presensi", $detailpresensi->id_presensi)->get()->first();
 
         $notiftitle = "Presensi anda di decline";
         $notifcontent = "Presensi anda pada ". $presensi->nama_presensi ." telah di decline";
