@@ -38,6 +38,18 @@ class CRUDController extends Controller
             'Content-type: Application/json'
         );
 
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fields));
+        curl_exec($ch);
+        curl_close($ch);
+
+
         return response()->json([
             'message' => 'Presensi Berhasil di Buat',
             'data' => $presensi
