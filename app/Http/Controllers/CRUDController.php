@@ -21,10 +21,6 @@ class CRUDController extends Controller
             'tanggal_close' => $request->tanggal_close,
             'is_open' => 0
         ]);
-        return response()->json([
-            'message' => 'Presensi Berhasil di Buat',
-            'data' => $presensi
-        ]);
 
         $notiftitle = "Ada presensi baru oleh ". $id->nama;
         $notifcontent = "Ada presensi baru dengan nama ". $request->nama_presensi;
@@ -55,6 +51,12 @@ class CRUDController extends Controller
         $response = curl_exec($curl);
         curl_close($curl);
         echo $response;
+
+
+        return response()->json([
+            'message' => 'Presensi Berhasil di Buat',
+            'data' => $presensi
+        ]);
     }
 
     public function listPresensiDosen(Request $request){
