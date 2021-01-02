@@ -12,7 +12,7 @@ use Carbon\Carbon;
 class CRUDController extends Controller
 {
     public function newPresensi(Request $request){
-        $id = Dosen::where('username', $request->username)->get('id_dosen', 'nama')->first();
+        $id = Dosen::where('username', $request->username)->get()->first();
         $presensi = Presensi::create([
             'id_dosen' => $id->id_dosen,
             'nama_presensi' => $request->nama_presensi,
