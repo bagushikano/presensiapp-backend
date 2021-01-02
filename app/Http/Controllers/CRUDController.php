@@ -23,7 +23,7 @@ class CRUDController extends Controller
         ]);
 
         $notiftitle = "Ada presensi baru oleh ". $id->nama;
-        $notifcontent = "Ada presensi baru dengan nama ". $request->nama_presensi;
+        $notifcontent = "Presensi baru dengan nama ". $request->nama_presensi;
 
         $url = 'https://fcm.googleapis.com/fcm/send';
         $fields = array(
@@ -117,6 +117,34 @@ class CRUDController extends Controller
         ->update([
             'is_open' => 1
         ]);
+
+        $notiftitle = "Presensi di buka";
+        $notifcontent = "Presensi dengan nama ". $updatePresensi->nama_presensi ." telah di buka";
+
+        $url = 'https://fcm.googleapis.com/fcm/send';
+        $fields = array(
+            "to" => "/topics/all",
+            'notification' => array(
+                "title" => $notiftitle,
+                "body" => $notifcontent
+            )
+        );
+        $headers = array(
+            'Authorization: key=AAAARvWFBSk:APA91bHfVZVkufvKbriuO7McpV-CguHTWwa7e9nuswg18F7N3qSjgEefKJsDqZTAKcZj26x0mEYgGaymJ_WtDuApADGhUsI9IbdxQJn1YTo4GC-Q738Rq4uvWabsbQ1pFTbr2k_o1T2Z',
+            'Content-type: Application/json'
+        );
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fields));
+        curl_exec($ch);
+        curl_close($ch);
+
         return response()->json([
             'message' => 'Absensi berhasil di buka'
         ]);
@@ -128,6 +156,34 @@ class CRUDController extends Controller
         ->update([
             'is_open' => 0
         ]);
+
+        $notiftitle = "Presensi di tutup". $id->nama;
+        $notifcontent = "Presensi dengan nama ". $updatePresensi->nama_presensi ." telah di tutup";
+
+        $url = 'https://fcm.googleapis.com/fcm/send';
+        $fields = array(
+            "to" => "/topics/all",
+            'notification' => array(
+                "title" => $notiftitle,
+                "body" => $notifcontent
+            )
+        );
+        $headers = array(
+            'Authorization: key=AAAARvWFBSk:APA91bHfVZVkufvKbriuO7McpV-CguHTWwa7e9nuswg18F7N3qSjgEefKJsDqZTAKcZj26x0mEYgGaymJ_WtDuApADGhUsI9IbdxQJn1YTo4GC-Q738Rq4uvWabsbQ1pFTbr2k_o1T2Z',
+            'Content-type: Application/json'
+        );
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fields));
+        curl_exec($ch);
+        curl_close($ch);
+
         return response()->json([
             'message' => 'Absensi berhasil di tutup'
         ]);
