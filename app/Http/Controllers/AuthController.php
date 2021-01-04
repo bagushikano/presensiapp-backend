@@ -90,7 +90,7 @@ class AuthController extends Controller
                 'message' => 'username sama'
             ]);
         }
-        else {
+        else if (strcmp($request->username, $dosen) == 0) {
             if(Auth::guard('mahasiswa')->attempt(['username' => $mahasiswa, 'password' => $request->password])) {
                 $updateMahasiswa = Mahasiswa::where('username', $mahasiswa)
                 ->update([
@@ -126,7 +126,7 @@ class AuthController extends Controller
                 'message' => 'username sama'
             ]);
         }
-        else {
+        else if (strcmp($request->username, $dosen) == 0){
             if(Auth::attempt(['username' => $dosen, 'password' => $request->password])) {
                 $updateDosen = Dosen::where('username', $dosen)
                 ->update([
