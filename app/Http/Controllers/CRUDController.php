@@ -30,7 +30,8 @@ class CRUDController extends Controller
             "to" => "/topics/all",
             'notification' => array(
                 "title" => $notiftitle,
-                "body" => $notifcontent
+                "body" => $notifcontent,
+                "tag" => "presensinew"
             ),
             "data" => array(
                 "type" => "all"
@@ -131,7 +132,8 @@ class CRUDController extends Controller
             "to" => "/topics/all",
             'notification' => array(
                 "title" => $notiftitle,
-                "body" => $notifcontent
+                "body" => $notifcontent,
+                "tag" => "presensiclose"
             ),
             "data" => array(
                 "type" => "all"
@@ -175,7 +177,8 @@ class CRUDController extends Controller
             "to" => "/topics/all",
             'notification' => array(
                 "title" => $notiftitle,
-                "body" => $notifcontent
+                "body" => $notifcontent,
+                "tag" => "presensiopen"
             ),
             "data" => array(
                 "type" => "all"
@@ -308,7 +311,8 @@ class CRUDController extends Controller
             "to" => "/topics/all",
             'notification' => array(
                 "title" => $notiftitle,
-                "body" => $notifcontent
+                "body" => $notifcontent,
+                "tag" => "approvenotif"
             ),
             "data" => array(
                 "type" => "notall",
@@ -355,7 +359,8 @@ class CRUDController extends Controller
             "to" => "/topics/all",
             'notification' => array(
                 "title" => $notiftitle,
-                "body" => $notifcontent
+                "body" => $notifcontent,
+                "tag" => "declinenotif"
             ),
             "data" => array(
                 "type" => "notall",
