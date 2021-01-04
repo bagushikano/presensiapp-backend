@@ -33,8 +33,7 @@ class CRUDController extends Controller
                 "body" => $notifcontent
             ),
             "data" => array(
-                "type" => "all",
-                "username" => $mahasiswa->username
+                "type" => "all"
             )
         );
         $headers = array(
@@ -135,8 +134,7 @@ class CRUDController extends Controller
                 "body" => $notifcontent
             ),
             "data" => array(
-                "type" => "notall",
-                "username" => $mahasiswa->username
+                "type" => "all"
             )
         );
         $headers = array(
@@ -180,8 +178,7 @@ class CRUDController extends Controller
                 "body" => $notifcontent
             ),
             "data" => array(
-                "type" => "notall",
-                "username" => $mahasiswa->username
+                "type" => "all"
             )
         );
         $headers = array(
