@@ -13,7 +13,7 @@ class AuthController extends Controller
     function registerDosen(Request $request) {
         $cekdosen = Dosen::where('username', $request->username)->count();
         $cekmhs = Mahasiswa::where('username', $request->username)->count();
-        if($cekdosen->count() > 0 || $cekmhs->count() > 0){
+        if($cekdosen > 0 || $cekmhs > 0){
             return response()->json([
                 'message' => 'username sama'
             ]);
