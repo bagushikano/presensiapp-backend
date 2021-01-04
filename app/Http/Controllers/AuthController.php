@@ -11,8 +11,8 @@ use App\Mahasiswa;
 class AuthController extends Controller
 {
     function registerDosen(Request $request) {
-        $cekdosen = Dosen::where('username', $request->username)->get()->first();
-        $cekmhs = Mahasiswa::where('username', $request->username)->get()->first();
+        $cekdosen = Dosen::where('username', $request->username)->count();
+        $cekmhs = Mahasiswa::where('username', $request->username)->count();
         if($cekdosen->count() > 0 || $cekmhs->count() > 0){
             return response()->json([
                 'message' => 'username sama'
@@ -47,9 +47,9 @@ class AuthController extends Controller
     }
 
     function registerMahasiwa(Request $request) {
-        $cekdosen = Dosen::where('username', $request->username)->get()->first();
-        $cekmhs = Mahasiswa::where('username', $request->username)->get()->first();
-        if($cekdosen->count() > 0 || $cekmhs->count() > 0){
+        $cekdosen = Dosen::where('username', $request->username)->count();
+        $cekmhs = Mahasiswa::where('username', $request->username)->count();
+        if($cekdosen > 0 || $cekmhs > 0){
             return response()->json([
                 'message' => 'username sama'
             ]);
