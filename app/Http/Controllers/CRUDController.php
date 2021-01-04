@@ -379,7 +379,7 @@ class CRUDController extends Controller
             ),
             "android" => array (
                 "notification"=> array (
-                    "tag" => "approvenotif"
+                    "tag" => "declinenotif"
                 )
             ),
             "data" => array(
