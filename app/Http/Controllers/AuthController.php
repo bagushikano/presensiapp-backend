@@ -85,7 +85,12 @@ class AuthController extends Controller
     public function editProfilMahasiswa(Request $request, $mahasiswa){
         $cekdosen = Dosen::where('username', $request->username)->count();
         $cekmhs = Mahasiswa::where('username', $request->username)->count();
-        if (strcmp($request->username, $mahasiswa) == 0) {
+        if(($cekdosen > 0 || $cekmhs > 0) && strcmp($request->username, $mahasiswa) !== 0){
+            return response()->json([
+                'message' => 'username sama'
+            ]);
+        }
+        else {
             if(Auth::guard('mahasiswa')->attempt(['username' => $mahasiswa, 'password' => $request->password])) {
                 $updateMahasiswa = Mahasiswa::where('username', $mahasiswa)
                 ->update([
@@ -110,18 +115,17 @@ class AuthController extends Controller
                 ]);
             }
         }
-        else if($cekdosen > 0 || $cekmhs > 0){
-            return response()->json([
-                'message' => 'username sama'
-            ]);
-        }
-
     }
 
     public function editProfilDosen(Request $request, $dosen){
         $cekdosen = Dosen::where('username', $request->username)->count();
         $cekmhs = Mahasiswa::where('username', $request->username)->count();
-        if (strcmp($request->username, $dosen) == 0){
+        if(($cekdosen > 0 || $cekmhs > 0) && strcmp($request->username, $dosen) !== 0){
+            return response()->json([
+                'message' => 'username sama'
+            ]);
+        }
+        else {
             if(Auth::attempt(['username' => $dosen, 'password' => $request->password])) {
                 $updateDosen = Dosen::where('username', $dosen)
                 ->update([
@@ -145,11 +149,6 @@ class AuthController extends Controller
                     'message' => "password salah"
                 ]);
             }
-        }
-        else if($cekdosen > 0 || $cekmhs > 0){
-            return response()->json([
-                'message' => 'username sama'
-            ]);
         }
     }
 
