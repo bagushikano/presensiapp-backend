@@ -83,55 +83,73 @@ class AuthController extends Controller
     }
 
     public function editProfilMahasiswa(Request $request, $mahasiswa){
-        if(Auth::guard('mahasiswa')->attempt(['username' => $mahasiswa, 'password' => $request->password])) {
-            $updateMahasiswa = Mahasiswa::where('username', $mahasiswa)
-            ->update([
-                'nama' => $request->nama,
-                'nim' => $request->nim,
-                'username' => $request->username,
+        $cekdosen = Dosen::where('username', $request->username)->count();
+        $cekmhs = Mahasiswa::where('username', $request->username)->count();
+        if($cekdosen > 0 || $cekmhs > 0){
+            return response()->json([
+                'message' => 'username sama'
             ]);
-            if($updateMahasiswa>0){
-                $mhs = Mahasiswa::where('username', $request->username)->get();
-                return response()->json([
-                    'message' => 'Data berhasil di Update',
-                    'data' => $mhs
+        }
+        else {
+            if(Auth::guard('mahasiswa')->attempt(['username' => $mahasiswa, 'password' => $request->password])) {
+                $updateMahasiswa = Mahasiswa::where('username', $mahasiswa)
+                ->update([
+                    'nama' => $request->nama,
+                    'nim' => $request->nim,
+                    'username' => $request->username,
                 ]);
-            } else if ($updateMahasiswa==0){
+                if($updateMahasiswa>0){
+                    $mhs = Mahasiswa::where('username', $request->username)->get();
+                    return response()->json([
+                        'message' => 'Data berhasil di Update',
+                        'data' => $mhs
+                    ]);
+                } else if ($updateMahasiswa==0){
+                    return response()->json([
+                        'message' => 'Data gagal di Update'
+                    ]);
+                }
+            } else{
                 return response()->json([
-                    'message' => 'Data gagal di Update'
+                    'message' => "password salah"
                 ]);
             }
-        } else{
-            return response()->json([
-                'message' => "password salah"
-            ]);
         }
 
     }
 
     public function editProfilDosen(Request $request, $dosen){
-        if(Auth::attempt(['username' => $dosen, 'password' => $request->password])) {
-            $updateDosen = Dosen::where('username', $dosen)
-            ->update([
-                'nama' => $request->nama,
-                'nip' => $request->nip,
-                'username' => $request->username,
+        $cekdosen = Dosen::where('username', $request->username)->count();
+        $cekmhs = Mahasiswa::where('username', $request->username)->count();
+        if($cekdosen > 0 || $cekmhs > 0){
+            return response()->json([
+                'message' => 'username sama'
             ]);
-            if($updateDosen>0){
-                $dsn = Dosen::where('username', $request->username)->get();
-                return response()->json([
-                    'message' => 'Data berhasil di Update',
-                    'data' => $dsn
+        }
+        else {
+            if(Auth::attempt(['username' => $dosen, 'password' => $request->password])) {
+                $updateDosen = Dosen::where('username', $dosen)
+                ->update([
+                    'nama' => $request->nama,
+                    'nip' => $request->nip,
+                    'username' => $request->username,
                 ]);
-            } else if ($updateDosen==0){
+                if($updateDosen>0){
+                    $dsn = Dosen::where('username', $request->username)->get();
+                    return response()->json([
+                        'message' => 'Data berhasil di Update',
+                        'data' => $dsn
+                    ]);
+                } else if ($updateDosen==0){
+                    return response()->json([
+                        'message' => 'Data gagal di Update'
+                    ]);
+                }
+            } else{
                 return response()->json([
-                    'message' => 'Data gagal di Update'
+                    'message' => "password salah"
                 ]);
             }
-        } else{
-            return response()->json([
-                'message' => "password salah"
-            ]);
         }
     }
 
