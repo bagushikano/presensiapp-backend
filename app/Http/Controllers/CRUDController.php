@@ -31,6 +31,10 @@ class CRUDController extends Controller
             'notification' => array(
                 "title" => $notiftitle,
                 "body" => $notifcontent
+            ),
+            "data" => array(
+                "type" => "all",
+                "username" => $mahasiswa->username
             )
         );
         $headers = array(
@@ -129,6 +133,10 @@ class CRUDController extends Controller
             'notification' => array(
                 "title" => $notiftitle,
                 "body" => $notifcontent
+            ),
+            "data" => array(
+                "type" => "notall",
+                "username" => $mahasiswa->username
             )
         );
         $headers = array(
@@ -170,6 +178,10 @@ class CRUDController extends Controller
             'notification' => array(
                 "title" => $notiftitle,
                 "body" => $notifcontent
+            ),
+            "data" => array(
+                "type" => "notall",
+                "username" => $mahasiswa->username
             )
         );
         $headers = array(
