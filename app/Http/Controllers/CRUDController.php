@@ -9,6 +9,7 @@ use App\Presensi;
 use App\DetailPresensi;
 use Carbon\Carbon;
 
+
 class CRUDController extends Controller
 {
 
@@ -122,7 +123,6 @@ class CRUDController extends Controller
 
 
     public function openPresensi(Request $request, $presensi){
-        Carbon.setlocale("id");
         $date = now()->setTimezone('GMT+8');
         $updatePresensi = Presensi::where('id_presensi', $presensi)
         ->update([
@@ -174,7 +174,6 @@ class CRUDController extends Controller
 
 
     public function closePresensi(Request $request, $presensi){
-        Carbon.setlocale("id");
         $date = now()->setTimezone('GMT+8');
         $updatePresensi = Presensi::where('id_presensi', $presensi)
         ->update([
@@ -274,7 +273,6 @@ class CRUDController extends Controller
     }
 
     public function newDetailPresensi(Request $request){
-        Carbon.setlocale("id");
         $id_mahasiswa = Mahasiswa::where('username', $request->username)->get('id_mahasiswa')->first();
         $presensi = DetailPresensi::create([
             'id_presensi' => $request->id_presensi,
