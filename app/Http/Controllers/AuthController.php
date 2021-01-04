@@ -85,12 +85,7 @@ class AuthController extends Controller
     public function editProfilMahasiswa(Request $request, $mahasiswa){
         $cekdosen = Dosen::where('username', $request->username)->count();
         $cekmhs = Mahasiswa::where('username', $request->username)->count();
-        if($cekdosen > 0 || $cekmhs > 0){
-            return response()->json([
-                'message' => 'username sama'
-            ]);
-        }
-        else if (strcmp($request->username, $dosen) == 0) {
+        if (strcmp($request->username, $dosen) == 0) {
             if(Auth::guard('mahasiswa')->attempt(['username' => $mahasiswa, 'password' => $request->password])) {
                 $updateMahasiswa = Mahasiswa::where('username', $mahasiswa)
                 ->update([
@@ -115,18 +110,18 @@ class AuthController extends Controller
                 ]);
             }
         }
+        else if($cekdosen > 0 || $cekmhs > 0){
+            return response()->json([
+                'message' => 'username sama'
+            ]);
+        }
 
     }
 
     public function editProfilDosen(Request $request, $dosen){
         $cekdosen = Dosen::where('username', $request->username)->count();
         $cekmhs = Mahasiswa::where('username', $request->username)->count();
-        if($cekdosen > 0 || $cekmhs > 0){
-            return response()->json([
-                'message' => 'username sama'
-            ]);
-        }
-        else if (strcmp($request->username, $dosen) == 0){
+        if (strcmp($request->username, $dosen) == 0){
             if(Auth::attempt(['username' => $dosen, 'password' => $request->password])) {
                 $updateDosen = Dosen::where('username', $dosen)
                 ->update([
@@ -150,6 +145,11 @@ class AuthController extends Controller
                     'message' => "password salah"
                 ]);
             }
+        }
+        if($cekdosen > 0 || $cekmhs > 0){
+            return response()->json([
+                'message' => 'username sama'
+            ]);
         }
     }
 
