@@ -32,7 +32,7 @@ class CRUDController extends Controller
                 "title" => $notiftitle,
                 "body" => $notifcontent,
             ),
-            android => array (
+            "android" => array (
                 "notification"=> array (
                     "tag" => "presensinew"
                 )
@@ -138,7 +138,7 @@ class CRUDController extends Controller
                 "title" => $notiftitle,
                 "body" => $notifcontent,
             ),
-            android => array (
+            "android" => array (
                 "notification"=> array (
                     "tag" => "presensiopen"
                 )
@@ -187,7 +187,7 @@ class CRUDController extends Controller
                 "title" => $notiftitle,
                 "body" => $notifcontent,
             ),
-            android => array (
+            "android" => array (
                 "notification"=> array (
                     "tag" => "presensiclose"
                 )
@@ -325,7 +325,7 @@ class CRUDController extends Controller
                 "title" => $notiftitle,
                 "body" => $notifcontent,
             ),
-            android => array (
+            "android" => array (
                 "notification"=> array (
                     "tag" => "approvenotif"
                 )
@@ -377,7 +377,7 @@ class CRUDController extends Controller
                 "title" => $notiftitle,
                 "body" => $notifcontent,
             ),
-            android => array (
+            "android" => array (
                 "notification"=> array (
                     "tag" => "approvenotif"
                 )
