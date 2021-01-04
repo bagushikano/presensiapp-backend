@@ -302,6 +302,7 @@ class CRUDController extends Controller
                 "body" => $notifcontent
             ),
             "data" => array(
+                "type" => "notall",
                 "username" => $mahasiswa->username
             )
         );
@@ -348,6 +349,7 @@ class CRUDController extends Controller
                 "body" => $notifcontent
             ),
             "data" => array(
+                "type" => "notall",
                 "username" => $mahasiswa->username
             )
         );
