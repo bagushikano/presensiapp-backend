@@ -123,10 +123,11 @@ class CRUDController extends Controller
 
     public function openPresensi(Request $request, $presensi){
         Carbon.setlocale("id");
+        $date = now()->setTimezone('GMT+8');
         $updatePresensi = Presensi::where('id_presensi', $presensi)
         ->update([
             'is_open' => 1,
-            'tanggal_open'=> now()->setTimezone('GMT+8')
+            'tanggal_open' => $date
         ]);
 
         $presensi = Presensi::where('id_presensi', $presensi)->get()->first();
@@ -174,10 +175,11 @@ class CRUDController extends Controller
 
     public function closePresensi(Request $request, $presensi){
         Carbon.setlocale("id");
+        $date = now()->setTimezone('GMT+8');
         $updatePresensi = Presensi::where('id_presensi', $presensi)
         ->update([
             'is_open' => 0,
-            'tanggal_close'=> now()->setTimezone('GMT+8')
+            'tanggal_close'=> $date
         ]);
 
         $presensi = Presensi::where('id_presensi', $presensi)->get()->first();
