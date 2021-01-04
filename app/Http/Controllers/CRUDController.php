@@ -11,6 +11,7 @@ use Carbon\Carbon;
 
 class CRUDController extends Controller
 {
+
     public function newPresensi(Request $request){
         $id = Dosen::where('username', $request->username)->get()->first();
         $presensi = Presensi::create([
@@ -121,9 +122,11 @@ class CRUDController extends Controller
 
 
     public function openPresensi(Request $request, $presensi){
+        Carbon.setlocale("id");
         $updatePresensi = Presensi::where('id_presensi', $presensi)
         ->update([
-            'is_open' => 1
+            'is_open' => 1,
+            'tanggal_open'=> now()->setTimezone('GMT+8')
         ]);
 
         $presensi = Presensi::where('id_presensi', $presensi)->get()->first();
@@ -170,9 +173,11 @@ class CRUDController extends Controller
 
 
     public function closePresensi(Request $request, $presensi){
+        Carbon.setlocale("id");
         $updatePresensi = Presensi::where('id_presensi', $presensi)
         ->update([
-            'is_open' => 0
+            'is_open' => 0,
+            'date_filled'=> now()->setTimezone('GMT+8')
         ]);
 
         $presensi = Presensi::where('id_presensi', $presensi)->get()->first();
@@ -267,11 +272,13 @@ class CRUDController extends Controller
     }
 
     public function newDetailPresensi(Request $request){
+        Carbon.setlocale("id");
         $id_mahasiswa = Mahasiswa::where('username', $request->username)->get('id_mahasiswa')->first();
         $presensi = DetailPresensi::create([
             'id_presensi' => $request->id_presensi,
             'id_mahasiswa' => $id_mahasiswa->id_mahasiswa,
-            'is_approved' => 0
+            'is_approved' => 0,
+            'date_filled'=> now()->setTimezone('GMT+8')
         ]);
         return response()->json([
             'message' => 'Presensi Berhasil di Buat',
