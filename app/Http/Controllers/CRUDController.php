@@ -31,7 +31,11 @@ class CRUDController extends Controller
             'notification' => array(
                 "title" => $notiftitle,
                 "body" => $notifcontent,
-                "tag" => "presensinew"
+            ),
+            android => array (
+                "notification"=> array (
+                    "tag" => "presensinew"
+                )
             ),
             "data" => array(
                 "type" => "all"
@@ -133,7 +137,11 @@ class CRUDController extends Controller
             'notification' => array(
                 "title" => $notiftitle,
                 "body" => $notifcontent,
-                "tag" => "presensiclose"
+            ),
+            android => array (
+                "notification"=> array (
+                    "tag" => "presensiopen"
+                )
             ),
             "data" => array(
                 "type" => "all"
@@ -178,7 +186,11 @@ class CRUDController extends Controller
             'notification' => array(
                 "title" => $notiftitle,
                 "body" => $notifcontent,
-                "tag" => "presensiopen"
+            ),
+            android => array (
+                "notification"=> array (
+                    "tag" => "presensiclose"
+                )
             ),
             "data" => array(
                 "type" => "all"
@@ -312,7 +324,11 @@ class CRUDController extends Controller
             'notification' => array(
                 "title" => $notiftitle,
                 "body" => $notifcontent,
-                "tag" => "approvenotif"
+            ),
+            android => array (
+                "notification"=> array (
+                    "tag" => "approvenotif"
+                )
             ),
             "data" => array(
                 "type" => "notall",
@@ -360,7 +376,11 @@ class CRUDController extends Controller
             'notification' => array(
                 "title" => $notiftitle,
                 "body" => $notifcontent,
-                "tag" => "declinenotif"
+            ),
+            android => array (
+                "notification"=> array (
+                    "tag" => "approvenotif"
+                )
             ),
             "data" => array(
                 "type" => "notall",
