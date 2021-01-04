@@ -13,7 +13,7 @@ class AuthController extends Controller
     function registerDosen(Request $request) {
         $cekdosen = Dosen::where('username', $request->username)->first();
         $cekmhs = Mahasiswa::where('username', $request->username)->first();
-        if(!($cekdosen->isEmpty()) || !($cekmhs->isEmpty())){
+        if($cekdosen->count() > 0 || $cekmhs->count() > 0){
             return response()->json([
                 'message' => 'username sama'
             ]);
@@ -49,7 +49,7 @@ class AuthController extends Controller
     function registerMahasiwa(Request $request) {
         $cekdosen = Dosen::where('username', $request->username)->first();
         $cekmhs = Mahasiswa::where('username', $request->username)->first();
-        if(!($cekdosen->isEmpty()) || !($cekmhs->isEmpty())){
+        if($cekdosen->count() > 0 || $cekmhs->count() > 0){
             return response()->json([
                 'message' => 'username sama'
             ]);
