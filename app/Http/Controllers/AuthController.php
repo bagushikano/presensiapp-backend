@@ -85,7 +85,7 @@ class AuthController extends Controller
     public function editProfilMahasiswa(Request $request, $mahasiswa){
         $cekdosen = Dosen::where('username', $request->username)->count();
         $cekmhs = Mahasiswa::where('username', $request->username)->count();
-        if (strcmp($request->username, $dosen) == 0) {
+        if (strcmp($request->username, $mahasiswa) == 0) {
             if(Auth::guard('mahasiswa')->attempt(['username' => $mahasiswa, 'password' => $request->password])) {
                 $updateMahasiswa = Mahasiswa::where('username', $mahasiswa)
                 ->update([
@@ -146,7 +146,7 @@ class AuthController extends Controller
                 ]);
             }
         }
-        if($cekdosen > 0 || $cekmhs > 0){
+        else if($cekdosen > 0 || $cekmhs > 0){
             return response()->json([
                 'message' => 'username sama'
             ]);
