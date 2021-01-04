@@ -11,16 +11,25 @@ use App\Mahasiswa;
 class AuthController extends Controller
 {
     function registerDosen(Request $request) {
-        $dsn = Dosen::create([
-            'nama' => $request->nama,
-            'nip' => $request->nip,
-            'username' => $request->username,
-            'password' => bcrypt($request->password)
-        ]);
+        $cekdosen = Dosen::where('username', $request->username)->first();
+        $cekmhs = Mahasiswa::where('username', $request->username)->first();
+        if($cekdosen>0 && $cekmhs>0){
+            return response()->json([
+                'message' => 'username sama'
+            ]);
+        }
+        else {
+            $dsn = Dosen::create([
+                'nama' => $request->nama,
+                'nip' => $request->nip,
+                'username' => $request->username,
+                'password' => bcrypt($request->password)
+            ]);
             return response()->json([
                 'message' => 'Berhasil Register',
                 'data' => $dsn
             ]);
+        }
     }
 
     function loginDosen(Request $request) {
@@ -38,16 +47,25 @@ class AuthController extends Controller
     }
 
     function registerMahasiwa(Request $request) {
-        $mhs = Mahasiswa::create([
-            'nama' => $request->nama,
-            'nim' => $request->nim,
-            'username' => $request->username,
-            'password' => bcrypt($request->password)
-        ]);
+        $cekdosen = Dosen::where('username', $request->username)->first();
+        $cekmhs = Mahasiswa::where('username', $request->username)->first();
+        if($cekdosen>0 && $cekmhs>0){
+            return response()->json([
+                'message' => 'username sama'
+            ]);
+        }
+        else {
+            $mhs = Mahasiswa::create([
+                'nama' => $request->nama,
+                'nim' => $request->nim,
+                'username' => $request->username,
+                'password' => bcrypt($request->password)
+            ]);
             return response()->json([
                 'message' => 'Berhasil Register',
                 'data' => $mhs
             ]);
+        }
     }
 
     function loginMahasiswa(Request $request) {
