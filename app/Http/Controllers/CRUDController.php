@@ -177,7 +177,7 @@ class CRUDController extends Controller
         $updatePresensi = Presensi::where('id_presensi', $presensi)
         ->update([
             'is_open' => 0,
-            'date_filled'=> now()->setTimezone('GMT+8')
+            'tanggal_close'=> now()->setTimezone('GMT+8')
         ]);
 
         $presensi = Presensi::where('id_presensi', $presensi)->get()->first();
