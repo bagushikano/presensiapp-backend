@@ -38,10 +38,12 @@ Route::post('presensi/close/{presensi}', 'CRUDController@closePresensi');
 
 Route::get('presensi/mahasiswa/all', 'CRUDController@allPresensi'); //semua presensi dari semua dosen
 Route::post('presensi/mahasiswa/detail', 'CRUDController@detailPresensiMahasiswa'); //detail presensi untuk mahasiswa yg udh ngisi
+
 // in case needed start here
 Route::get('presensi/mahasiswa/close', 'CRUDController@listClosePresensi');
 Route::get('presensi/mahasiswa/open', 'CRUDController@listOpenPresensi');
 // in case needed stop
+
 Route::post('presensi/mahasiswa/sign', 'CRUDController@newDetailPresensi'); //isi presensi buat mahasiswa (create detail presensi)
 Route::post('presensi/mahasiswa/getpresensi', 'CRUDController@mahasiswaPresensi'); //presensi with dosen
 
